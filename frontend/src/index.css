@@ -1,0 +1,238 @@
+@import "tailwindcss";
+
+/* ─── Custom Theme: The Architectural Ledger ─── */
+@theme {
+  --color-bg-primary: #f0f2f5;
+  --color-bg-secondary: #e4e6ea;
+  --color-bg-card: #ffffff;
+  --color-bg-card-hover: #fcfcfd;
+  
+  --color-border: #e7e8e9;
+  --color-border-focus: #00685f;
+  
+  --color-accent: #00685f;
+  --color-accent-light: #008378;
+  --color-accent-dark: #00504a;
+  
+  --color-success: #005049;
+  --color-success-bg: #89f5e7;
+  --color-warning: #3a485b;
+  --color-warning-bg: #d5e3fc;
+  --color-danger: #93000a;
+  --color-danger-bg: #ffdad6;
+  --color-info: #0d1c2e;
+  --color-info-bg: #b9c7df;
+  
+  --color-text-primary: #191c1d;
+  --color-text-secondary: #3d4947;
+  --color-text-muted: #57657a;
+  
+  --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+}
+
+/* ─── Base Styles ─── */
+* {
+  /* margin: 0;
+  padding: 0; */
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ─── Paper Card (No Solid Borders, Tonal Definition) ─── */
+.paper-card {
+  background-color: var(--color-bg-card);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 104, 95, 0.1);
+  box-shadow: 0px 4px 12px -2px rgba(0, 0, 0, 0.05), 
+              0px 2px 4px -2px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.paper-card:hover {
+  box-shadow: 0px 12px 24px -4px rgba(0, 0, 0, 0.08), 
+              0px 4px 8px -2px rgba(0, 0, 0, 0.06);
+}
+
+/* ─── Button (Primary with subtle gradient) ─── */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+  color: #ffffff;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0px 4px 12px rgba(0, 104, 95, 0.15);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0px 6px 16px rgba(0, 104, 95, 0.25);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0px 2px 4px rgba(0, 104, 95, 0.1);
+}
+
+/* ─── Input Fields (Minimalist) ─── */
+.input-minimal {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(188, 201, 198, 0.4); /* outline_variant */
+  border-radius: 0;
+  padding: 8px 0;
+  color: var(--color-text-primary);
+  font-family: inherit;
+  font-size: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.input-minimal:focus {
+  outline: none;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 7px; /* Maintain height */
+}
+
+/* ─── Status Badges ─── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-pending {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning);
+}
+
+.badge-processing {
+  background-color: var(--color-info-bg);
+  color: var(--color-info);
+  animation: pulse-glow-blue 2s ease-in-out infinite;
+}
+
+.badge-completed {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.badge-failed {
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger);
+}
+
+.badge-credit {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.badge-debit {
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger);
+}
+
+.badge-hold {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning);
+}
+
+.badge-release {
+  background-color: var(--color-info-bg);
+  color: var(--color-info);
+}
+
+/* ─── Label Meta Text ─── */
+.label-meta {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+/* ─── Animations ─── */
+@keyframes pulse-glow-blue {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(188, 201, 198, 0.4);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(188, 201, 198, 0.8);
+}
+
+/* ─── Dot indicator ─── */
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-pending { background-color: var(--color-warning); }
+.dot-processing { 
+  background-color: var(--color-info);
+  animation: pulse-glow-blue 1.5s ease-in-out infinite;
+}
+.dot-completed { background-color: var(--color-success); }
+.dot-failed { background-color: var(--color-danger); }
+
+/* Tabular numbers for currency */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
