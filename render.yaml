@@ -8,6 +8,7 @@ services:
   - type: redis
     name: playto-redis
     plan: free
+    ipAllowList: [] # Required by Render. Empty list = internal access only.
 
   - type: web
     name: playto-backend
