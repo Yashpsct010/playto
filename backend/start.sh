@@ -10,5 +10,8 @@ celery -A playto beat -l info --detach
 echo "Applying migrations..."
 python manage.py migrate --noinput
 
+echo "Seeding database if empty..."
+python manage.py seed_data
+
 echo "Starting Gunicorn server..."
 exec gunicorn playto.wsgi:application --bind 0.0.0.0:8000 --workers 2

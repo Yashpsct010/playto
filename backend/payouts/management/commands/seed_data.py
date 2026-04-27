@@ -16,16 +16,13 @@ class Command(BaseCommand):
     help = 'Seed the database with test merchants, bank accounts, and credit history'
 
     def handle(self, *args, **options):
+        self.stdout.write('Checking database state...\n')
+
+        if Merchant.objects.exists():
+            self.stdout.write(self.style.SUCCESS('Database already contains data. Skipping seed.'))
+            return
+
         self.stdout.write('Seeding database...\n')
-
-        # Clear existing data (idempotent re-seeding)
-        LedgerEntry.objects.all().delete()
-        from payouts.models import Payout, IdempotencyRecord
-        Payout.objects.all().delete()
-        IdempotencyRecord.objects.all().delete()
-        BankAccount.objects.all().delete()
-        Merchant.objects.all().delete()
-
         now = timezone.now()
 
         # ─── Merchant 1: Priya's Design Studio ───
